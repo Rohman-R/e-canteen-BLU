@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>E-Canteen BLU</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --primary:#A1001C;
+    --background:#F8F7F1;
+    --text:#1F2937;
+    --muted:#6B7280;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#2D2D2D;
+    overflow:hidden;
+}
+
+/* Phone Frame */
+
+.phone-frame{
+
+    width:390px;
+    height:844px;
+
+    background:var(--background);
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:35px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,.25);
+}
+
+/* Decorative Elements */
+
+.phone-frame::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+    height:280px;
+
+    border-radius:50%;
+
+    background:
+    rgba(161,0,28,.05);
+
+    top:-140px;
+    right:-140px;
+}
+
+.phone-frame::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:200px;
+    height:200px;
+
+    border-radius:50%;
+
+    background:
+    rgba(161,0,28,.04);
+
+    bottom:-100px;
+    left:-100px;
+}
+
+/* Logo */
+
+.logo{
+
+    width:280px;
+
+    object-fit:contain;
+
+    margin-bottom:10px;
+
+    animation:
+    logoIntro 1.2s ease forwards;
+
+    filter:
+    drop-shadow(
+        0 8px 20px rgba(0,0,0,.08)
+    );
+}
+
+/* Title */
+
+.title{
+
+    color:var(--primary);
+
+    font-size:36px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+    letter-spacing:-1px;
+
+    animation:
+    fadeUp 1s ease;
+}
+
+/* Subtitle */
+
+.subtitle{
+
+    color:var(--muted);
+
+    font-size:16px;
+
+    font-weight:500;
+
+    animation:
+    fadeUp 1.2s ease;
+}
+
+/* Footer */
+
+.footer{
+
+    position:absolute;
+
+    bottom:35px;
+
+    color:#9CA3AF;
+
+    font-size:12px;
+}
+
+/* Logo Animation */
+
+@keyframes logoIntro{
+
+    0%{
+        opacity:0;
+        transform:scale(.8);
+    }
+
+    60%{
+        opacity:1;
+        transform:scale(1.05);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* Text Animation */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Exit Animation */
+
+.page-exit{
+
+    animation:
+    slideUp .6s ease forwards;
+}
+
+@keyframes slideUp{
+
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-100%);
+        opacity:0;
+    }
+}
+
+/* Mobile */
+
+@media(max-width:420px){
+
+    body{
+        background:var(--background);
+    }
+
+    .phone-frame{
+
+        width:100%;
+        height:100vh;
+
+        border-radius:0;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="phone-frame">
+
+    <img
+    src="logo.png"
+    alt="Logo E-Canteen BLU"
+    class="logo">
+
+    <div class="title">
+        E-Canteen BLU
+    </div>
+
+    <div class="subtitle">
+        Pesan • Bayar • Ambil
+    </div>
+
+    <div class="footer">
+        Universitas Budi Luhur
+    </div>
+
+</div>
+
+<script>
+
+setTimeout(() => {
+
+    document
+        .querySelector('.phone-frame')
+        .classList.add('page-exit');
+
+    setTimeout(() => {
+
+        window.location.href =
+        "welcome.html";
+
+    }, 600);
+
+}, 1500);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pembayaran QRIS - E-Canteen BLU</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+:root{
+    --primary: #A1001C;
+    --primary-light: #C81D37;
+    --background: #FCFBF4;
+    --text: #1F2937;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --border-dark: #374151; /* Warna border abu gelap untuk garis tepian tegas */
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #2D2D2D;
+}
+
+.phone{
+    width: 390px;
+    height: 844px;
+    background: var(--background);
+    overflow: hidden;
+    position: relative;
+    border-radius: 35px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    display: flex;
+    flex-direction: column;
+    /* Menambahkan garis tepi device HP agar konsisten */
+    border: 2px solid #555; 
+}
+
+/* HEADER */
+.header{
+    height: 140px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    position: relative;
+    padding-top: 45px;
+    flex-shrink: 0;
+}
+
+.header::before{
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.08);
+    right: -50px;
+    top: -50px;
+    pointer-events: none;
+}
+
+.back-btn{
+    position: absolute;
+    top: 45px;
+    left: 20px;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255,255,255,.15);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.page-title{
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.page-subtitle{
+    text-align: center;
+    color: rgba(255,255,255,.85);
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+/* CONTENT QRIS */
+.content{
+    flex: 1;
+    overflow-y: auto;
+    padding: 30px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content::-webkit-scrollbar{
+    display: none;
+}
+
+.timer{
+    font-size: 46px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.1;
+    letter-spacing: 1px;
+}
+
+.timer-subtitle{
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 25px;
+    max-width: 220px;
+    line-height: 1.4;
+}
+
+/* QR CARD UPGRADE - Ditambahkan Garis Tepian */
+.qr-card{
+    background: white;
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.05);
+    /* Garis tepian yang dipertegas */
+    border: 1.5px solid var(--border-dark); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 260px;
+    margin-bottom: 20px;
+}
+
+.qr-image{
+    width: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    /* Memberikan garis tepi tipis pada area QR */
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.qr-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.qr-instruction{
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+/* TOMBOL SIMPAN QR */
+.btn-download-qr{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    color: var(--primary);
+    border: 1.5px solid var(--primary);
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-download-qr:hover{
+    background: rgba(161, 0, 28, 0.05);
+}
+
+/* STATUS BADGE */
+.status-badge{
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 20px;
+    border: 1.5px solid var(--border-dark); /* Garis tepi dipertegas */
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    background: white;
+    margin-bottom: auto; /* Mendorong tombol ke bawah */
+}
+
+/* ACTION BUTTONS */
+.action-buttons{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+/* Tombol Sekunder / Batal */
+.btn-cancel{
+    width: 100%;
+    height: 52px;
+    border: 1.5px solid var(--border-dark); /* Garis tepi dipertegas */
+    border-radius: 14px;
+    background: #E5E7EB;
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-cancel:hover{
+    background: #D1D5DB;
+}
+
+/* TOAST */
+.toast{
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: #16A34A;
+    color: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+    z-index: 9999;
+    border: 1.5px solid #14532D;
+}
+
+.toast.show{
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+@media(max-width:420px){
+    body{
+        background: var(--background);
+    }
+    .phone{
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="toast" class="toast">
+    Notifikasi
+</div>
+
+<div class="phone">
+
+    <div class="header">
+        <button class="back-btn" onclick="history.back()">
+            <i class="bi bi-arrow-left"></i>
+        </button>
+        <div class="page-title">Pembayaran QRIS</div>
+        <div class="page-subtitle">Scan QRis untuk membayar</div>
+    </div>
+
+    <div class="content">
+
+        <div class="timer" id="countdown">09:47</div>
+        <div class="timer-subtitle">Selesaikan pembayaran anda sebelum waktu habis</div>
+
+        <div class="qr-card">
+            <div class="qr-image">
+                <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=Pembayaran-ECanteen" alt="QR Code">
+            </div>
+            <button class="btn-download-qr" onclick="simpanQR()">
+                <i class="bi bi-download"></i> Simpan Gambar QR
+            </button>
+        </div>
+
+        <div class="status-badge">Status Pembayaran: Pending</div>
+
+        <div class="action-buttons">
+            <button class="btn-cancel" onclick="batal()">Batalkan Pembayaran</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+// Logic Menampilkan Toast Notifikasi
+function munculkanToast(pesan, warna) {
+    const toast = document.getElementById("toast");
+    toast.innerText = pesan;
+    toast.style.background = warna;
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    }, 2000);
+}
+
+// Logic Unduh QR
+async function simpanQR() {
+    munculkanToast("Menyiapkan unduhan QR...", "#16A34A");
+    
+    const imgUrl = document.getElementById('qrImage').src;
+    
+    try {
+        const response = await fetch(imgUrl);
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'QRIS_ECanteen.png';
+        document.body.appendChild(a);
+        a.click();
+        
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+        
+        setTimeout(() => {
+            munculkanToast("QR berhasil disimpan!", "#16A34A");
+        }, 1000);
+    } catch (e) {
+        const a = document.createElement('a');
+        a.href = imgUrl;
+        a.download = 'QRIS_ECanteen.png';
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+}
+
+// Logic Tombol Batal
+function batal() {
+    munculkanToast("Pembayaran Dibatalkan", "#DC2626");
+    setTimeout(()=>{
+        history.back(); // Kembali ke halaman sebelumnya (metode_pembayaran)
+    }, 1500);
+}
+
+// Logic Countdown Timer (Dari 09:47)
+let waktuSec = (9 * 60) + 47; 
+const timerText = document.getElementById('countdown');
+
+const hitungMundur = setInterval(() => {
+    const menit = Math.floor(waktuSec / 60);
+    const detik = waktuSec % 60;
+    
+    // Format agar selalu dua digit, contoh: 09:05
+    timerText.innerText = `${menit.toString().padStart(2, '0')}:${detik.toString().padStart(2, '0')}`;
+    
+    if (waktuSec <= 0) {
+        clearInterval(hitungMundur);
+        timerText.innerText = "00:00";
+        document.querySelector('.status-badge').innerText = "Status Pembayaran: Kadaluarsa";
+        munculkanToast("Waktu pembayaran habis", "#DC2626");
+    } else {
+        waktuSec--;
+    }
+}, 1000);
+
+// Catatan: Di skenario dunia nyata, status dari Pending menjadi Berhasil (dan dialihkan ke struk) 
+// akan dikendalikan otomatis menggunakan WebSocket atau pengecekan AJAX secara berkala (Polling) ke server.
+</script>
+
+</body>
+</html>

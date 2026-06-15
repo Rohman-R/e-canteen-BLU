@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Edit Profil - E-Canteen BLU</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+
+:root{
+    --primary:#A1001C;
+    --primary-light:#C81D37;
+    --background:#F8F7F1;
+    --text:#1F2937;
+    --muted:#6B7280;
+    --border:#E5E7EB;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#2D2D2D;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* CONTAINER HP */
+.phone{
+    width:390px;
+    height:844px;
+    background:var(--background);
+    overflow:hidden;
+    position:relative;
+    border-radius:35px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+    border: 6px solid #111827; 
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER SUB-PAGE */
+.header-sub{
+    background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-light)
+    );
+    height:100px;
+    padding:45px 20px 0;
+    color:white;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    position:relative;
+    overflow:hidden;
+    flex-shrink: 0;
+}
+
+.header-sub::before{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    right:-50px;
+    top:-50px;
+}
+
+.back-btn{
+    color:white;
+    font-size:24px;
+    text-decoration:none;
+    z-index:1;
+    cursor:pointer;
+}
+
+.page-title{
+    font-size:18px;
+    font-weight:600;
+    z-index:1;
+}
+
+/* CONTENT AREA */
+.content{
+    flex: 1;
+    overflow-y:auto;
+    padding:30px 20px;
+}
+
+.content::-webkit-scrollbar{
+    display:none;
+}
+
+/* EDIT FOTO PROFIL */
+.edit-photo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px; /* Disamaratakan */
+}
+
+.profile-pic-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border: 3px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.profile-pic-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.change-photo-btn {
+    width: auto;
+    height: auto;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: white;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid #D9D9D9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.change-photo-btn:hover {
+    background: #F8F8F8;
+}
+
+/* Input file tersembunyi */
+.file-input {
+    display: none;
+}
+
+/* FORM STYLE */
+.form-group{
+    margin-bottom: 20px; /* Jarak standar antar kolom */
+}
+
+.form-label{
+    display:block;
+    font-size:13px;
+    font-weight:500;
+    color:var(--muted);
+    margin-bottom:8px;
+}
+
+.form-input{
+    width:100%;
+    height:50px;
+    border:1px solid #D9D9D9;
+    border-radius:14px;
+    padding:0 16px;
+    font-size:14px;
+    background:white;
+    color:var(--text);
+    outline:none;
+    transition:.3s;
+}
+
+.form-input:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 3px rgba(161,0,28,0.1);
+}
+
+.info-text{
+    font-size:11px;
+    color:var(--muted);
+    margin-top:6px;
+}
+
+/* GARIS PEMISAH */
+.divider {
+    border: none;
+    border-top: 1px dashed #D9D9D9;
+    margin: 0 0 20px 0; /* Menghindari kelebihan jarak (double margin) */
+}
+
+.save-btn{
+    width:100%;
+    height:52px;
+    border:none;
+    border-radius:14px;
+    background:var(--primary);
+    color:white;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top: 10px; /* Disesuaikan agar seimbang dengan form-group terakhir */
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    transition:.3s;
+    border: 1.5px solid #374151;
+}
+
+.save-btn:hover{
+    background:var(--primary-light);
+}
+
+@media(max-width:420px){
+    body{
+        background:var(--background);
+    }
+    .phone{
+        width:100%;
+        height:100vh;
+        border-radius:0;
+        box-shadow:none;
+        border: none;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+
+    <div class="header-sub">
+        <a href="profil.html" class="back-btn">
+            <i class="bi bi-arrow-left"></i>
+        </a>
+        <div class="page-title">Edit Profil</div>
+    </div>
+
+    <div class="content">
+        
+        <form id="editProfileForm">
+            <div class="edit-photo-area">
+                <div class="profile-pic-container">
+                    <img id="profilePreview" src="https://i.pravatar.cc/300" alt="Pratinjau Foto Profil">
+                </div>
+                
+                <input type="file" id="inputFileFoto" class="file-input" accept="image/*">
+                
+                <label for="inputFileFoto" class="change-photo-btn">
+                    <i class="bi bi-camera"></i> Ubah Foto
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Nama Lengkap</label>
+                <input type="text" class="form-input" id="inputNama" value="Muhammad Rizky" required>
+            </div>
+
+            <hr class="divider">
+
+            <div class="form-group">
+                <label class="form-label">Password Lama</label>
+                <input type="password" class="form-input" id="inputPassLama" placeholder="Masukkan password saat ini">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Password Baru</label>
+                <input type="password" class="form-input" id="inputPassBaru" placeholder="Minimal 8 karakter">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Konfirmasi Password Baru</label>
+                <input type="password" class="form-input" id="inputPassKonfirmasi" placeholder="Ketik ulang password baru">
+                <div class="info-text">*Kosongkan bagian password jika Anda tidak ingin mengubahnya.</div>
+            </div>
+
+            <button type="submit" class="save-btn">
+                <i class="bi bi-floppy"></i> Simpan Perubahan
+            </button>
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+// Penanganan Unggahan File dan Pratinjau Instan
+const inputFileFoto = document.getElementById('inputFileFoto');
+const profilePreview = document.getElementById('profilePreview');
+
+inputFileFoto.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            profilePreview.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+// Penanganan Validasi Formulir
+document.getElementById("editProfileForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const namaLengkap = document.getElementById("inputNama").value;
+    const passBaru = document.getElementById("inputPassBaru").value;
+    const passKonfirmasi = document.getElementById("inputPassKonfirmasi").value;
+    const fileFoto = inputFileFoto.files[0];
+
+    // Validasi Password
+    if (passBaru !== "" || passKonfirmasi !== "") {
+        if (passBaru !== passKonfirmasi) {
+            alert("Gagal: Konfirmasi password baru tidak cocok!");
+            return;
+        }
+        if (passBaru.length < 8) {
+            alert("Gagal: Password baru harus minimal 8 karakter!");
+            return;
+        }
+    }
+
+    let pesan = `Profil berhasil diperbarui!\nNama Baru: ${namaLengkap}`;
+    if (fileFoto) {
+        pesan += `\nFoto Baru: ${fileFoto.name}`;
+    }
+
+    alert(pesan);
+    
+    // Kembali ke halaman profil
+    window.location.href = "profil.html";
+});
+</script>
+
+</body>
+</html>

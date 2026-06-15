@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>E-Canteen BLU</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --primary:#A1001C;
+    --background:#F8F7F1;
+    --text:#1F2937;
+    --muted:#6B7280;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#e5e5e5;
+}
+
+.phone{
+    width:390px;
+    height:844px;
+    background:var(--background);
+    border-radius:35px;
+    overflow:hidden;
+    position:relative;
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+}
+
+/* decorative background */
+
+.bg-circle-1{
+    position:absolute;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    background:rgba(161,0,28,.05);
+
+    top:-120px;
+    right:-100px;
+}
+
+.bg-circle-2{
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:rgba(161,0,28,.04);
+
+    bottom:-80px;
+    left:-80px;
+}
+
+.content{
+
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:40px;
+
+    position:relative;
+    z-index:2;
+}
+
+.logo-container{
+
+    width:180px;
+    height:180px;
+
+    background:white;
+
+    border-radius:40px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.08);
+
+    margin-bottom:40px;
+
+    animation:fadeUp .8s ease;
+}
+
+.logo{
+    width:135px;
+}
+
+.title{
+
+    font-size:34px;
+    font-weight:700;
+
+    color:var(--primary);
+
+    margin-bottom:12px;
+
+    animation:fadeUp 1s ease;
+}
+
+.subtitle{
+
+    color:var(--muted);
+
+    line-height:1.8;
+
+    font-size:15px;
+
+    max-width:280px;
+
+    margin-bottom:50px;
+
+    animation:fadeUp 1.2s ease;
+}
+
+.btn{
+
+    width:100%;
+    height:58px;
+
+    border:none;
+    border-radius:18px;
+
+    font-size:16px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.btn-login{
+
+    background:var(--primary);
+    color:white;
+
+    margin-bottom:14px;
+
+    box-shadow:
+    0 10px 25px rgba(161,0,28,.2);
+}
+
+.btn-login:hover{
+    transform:translateY(-2px);
+}
+
+.btn-register{
+
+    background:white;
+    color:var(--primary);
+
+    border:2px solid var(--primary);
+}
+
+.btn-register:hover{
+
+    background:var(--primary);
+    color:white;
+}
+
+.footer{
+
+    margin-top:25px;
+
+    color:#9CA3AF;
+
+    font-size:12px;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:420px){
+
+    .phone{
+        width:100%;
+        height:100vh;
+        border-radius:0;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+
+    <div class="bg-circle-1"></div>
+    <div class="bg-circle-2"></div>
+
+    <div class="content">
+
+        <div class="logo-container">
+
+            <img src="logo.png"
+            class="logo"
+            alt="E-Canteen BLU">
+
+        </div>
+
+        <div class="title">
+            E-Canteen BLU
+        </div>
+
+        <div class="subtitle">
+            Pesan makanan kampus lebih cepat,
+            lebih mudah, dan tanpa antre.
+        </div>
+
+        <button
+        class="btn btn-login"
+        onclick="window.location.href='login.html'">
+            Masuk
+        </button>
+
+        <button
+        class="btn btn-register"
+        onclick="window.location.href='register.html'">
+            Daftar Akun
+        </button>
+
+        <div class="footer">
+            Universitas Budi Luhur
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

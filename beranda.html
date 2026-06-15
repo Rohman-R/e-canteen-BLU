@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Home - E-Canteen BLU</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+:root{
+    --primary:#A1001C;
+    --primary-light:#C81D37;
+    --background:#F8F7F1;
+    --text:#1F2937;
+    --muted:#6B7280;
+    --border:#B0B0B0;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#2D2D2D;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.phone{
+    width:390px;
+    height:844px;
+    background:var(--background);
+    overflow:hidden;
+    position:relative;
+    border-radius:35px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+    border: 2px solid #555;
+}
+
+/* HEADER */
+.header{
+    background:linear-gradient(135deg, var(--primary), var(--primary-light));
+    height:120px;
+    padding:45px 20px 20px;
+    color:white;
+    position:relative;
+}
+
+.header::before{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    right:-50px;
+    top:-50px;
+    pointer-events: none;
+}
+
+.header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position: relative;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.avatar{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:white;
+    color:var(--primary);
+    font-weight:700;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:18px;
+    border: 2px solid #FFF; 
+}
+
+.profile-info h3{
+    font-size:18px;
+    font-weight:600;
+}
+
+.profile-info p{
+    font-size:12px;
+    opacity:.9;
+    margin-top:2px;
+}
+
+/* TOMBOL KERANJANG */
+.cart-btn {
+    width: 54px; 
+    height: 54px; 
+    background: rgba(255, 255, 255, 0.2); 
+    border: 1.5px solid rgba(255, 255, 255, 0.5); 
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 10; 
+    -webkit-tap-highlight-color: transparent;
+}
+
+.cart-btn i {
+    font-size: 26px; 
+    pointer-events: none;
+}
+
+.cart-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.cart-btn:active {
+    transform: scale(0.92); 
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* CONTENT */
+.content{
+    height:calc(100% - 195px);
+    overflow-y:auto;
+    padding:20px;
+}
+
+.content::-webkit-scrollbar{
+    display:none;
+}
+
+.section-title{
+    font-size:15px;
+    font-weight:600;
+    color:var(--text);
+    margin-bottom:8px;
+}
+
+.filter-label{
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:8px;
+}
+
+.select-warung{
+    width:100%;
+    height:52px;
+    border:1.5px solid var(--border); 
+    border-radius:14px;
+    padding:0 16px;
+    font-size:15px;
+    background:white;
+    outline:none;
+    margin-bottom:16px;
+}
+
+.warung-info{
+    margin-bottom:20px;
+}
+
+.warung-btn{
+    width:100%;
+    height:50px;
+    border-radius:14px;
+    background:#FFFFFF;
+    border:1.5px solid var(--border); 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+    font-weight:600;
+    color:var(--primary);
+    cursor:pointer;
+    transition:.3s;
+}
+
+.warung-btn:hover{
+    background:#F8F8F8;
+}
+
+.menu-title{
+    font-size:18px;
+    font-weight:700;
+    color:var(--text);
+    margin-bottom:14px;
+}
+
+/* MENU GRID */
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    padding-bottom: 20px; 
+}
+
+.menu-card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    border:1.5px solid var(--border); 
+    transition:.3s;
+    cursor:pointer;
+}
+
+.menu-card:hover{
+    transform:translateY(-2px);
+    border-color: var(--primary); 
+}
+
+.menu-image{
+    height:110px;
+    background:#E9E9E9;
+    border-bottom: 1px solid #D9D9D9; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    font-size:42px;
+    color:#999;
+}
+
+.stock-badge{
+    position:absolute;
+    top:10px;
+    right:10px;
+    background:#DC2626;
+    color:white;
+    padding:4px 8px;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:600;
+}
+
+.menu-content{
+    padding:10px;
+}
+
+.menu-name{
+    font-size:15px;
+    font-weight:600;
+    color:var(--text);
+}
+
+.menu-price{
+    margin-top:6px;
+    font-size:20px;
+    font-weight:700;
+    color:#111827;
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:75px;
+    background:#D9D9D9;
+    display:flex; 
+    z-index:100;
+    border-top: 1px solid #B0B0B0;
+}
+
+.nav-item{
+    flex: 1; 
+    height: 100%; 
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center; 
+    gap:4px;
+    cursor:pointer;
+    transition: background 0.2s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.nav-item:active {
+    background: rgba(0, 0, 0, 0.1); 
+}
+
+.icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-item i{
+    font-size:24px;
+    color:#000;
+}
+
+.nav-badge {
+    position: absolute;
+    top: -4px;
+    right: -8px;
+    background: var(--primary);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #D9D9D9;
+}
+
+.nav-item span{
+    font-size:12px;
+    color:#000;
+}
+
+.nav-item.active i,
+.nav-item.active span{
+    color:var(--primary);
+    font-weight:600;
+}
+
+@media(max-width:420px){
+    body{
+        background:var(--background);
+    }
+    .phone{
+        width:100%;
+        height:100vh;
+        border-radius:0;
+        border: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+
+    <div class="header">
+        <div class="header-top">
+            <div class="profile">
+                <div class="avatar">MF</div>
+                <div class="profile-info">
+                    <h3>Mahasiswa</h3>
+                    <p>Saldo E-Canteen : Rp 50.000</p>
+                </div>
+            </div>
+            <a href="keranjang.html" class="cart-btn">
+                <i class="bi bi-cart3"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section-title">Pilih Warung</div>
+        <div class="filter-label">Filter:</div>
+
+        <select id="warungSelect" class="select-warung"></select>
+
+        <div class="warung-info">
+            <button class="warung-btn" onclick="lihatWarung()">
+                <i class="bi bi-shop"></i>
+                Lihat Profil Warung
+            </button>
+        </div>
+
+        <div class="menu-title">Menu Tersedia</div>
+        <div class="menu-grid" id="menuContainer"></div>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item active">
+            <i class="bi bi-house-fill"></i>
+            <span>Home</span>
+        </div>
+
+        <div class="nav-item" onclick="window.location.href='pesanan.html'">
+            <div class="icon-wrapper">
+                <i class="bi bi-basket"></i>
+                <div class="nav-badge">2</div>
+            </div>
+            <span>Pesanan</span>
+        </div>
+
+        <div class="nav-item" onclick="window.location.href='riwayat.html'">
+            <i class="bi bi-receipt-cutoff"></i>
+            <span>Transaksi</span>
+        </div>
+
+        <div class="nav-item" onclick="window.location.href='profil.html'">
+            <i class="bi bi-person-circle"></i>
+            <span>Profil</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// =========================
+// DATA DUMMY
+// =========================
+const warungData = {
+    "Warung Bu Gendut":[
+        { nama:"Nasi Goreng", harga:"Rp 15.000", icon:"bi-egg-fried", status:"tersedia" },
+        { nama:"Kwetiaw", harga:"Rp 17.000", icon:"bi-cup-hot", status:"habis" },
+        { nama:"Soto Daging", harga:"Rp 20.000", icon:"bi-bowl-hot", status:"tersedia" },
+        { nama:"Ayam Penyet", harga:"Rp 20.000", icon:"bi-fire", status:"tersedia" },
+        { nama:"Steak", harga:"Rp 25.000", icon:"bi-stars", status:"habis" },
+        { nama:"Sate Taichan", harga:"Rp 18.000", icon:"bi-fire", status:"habis" }
+    ],
+    "Warung Bu Sari":[
+        { nama:"Nasi Uduk", harga:"Rp 12.000", icon:"bi-egg-fried", status:"tersedia" },
+        { nama:"Mie Goreng", harga:"Rp 14.000", icon:"bi-cup-hot", status:"tersedia" },
+        { nama:"Es Teh", harga:"Rp 5.000", icon:"bi-cup-straw", status:"habis" },
+        { nama:"Ayam Bakar", harga:"Rp 22.000", icon:"bi-fire", status:"habis" }
+    ],
+    "Warung Pak Budi":[
+        { nama:"Bakso", harga:"Rp 15.000", icon:"bi-bowl-hot", status:"tersedia" },
+        { nama:"Mie Ayam", harga:"Rp 14.000", icon:"bi-cup-hot", status:"tersedia" },
+        { nama:"Es Jeruk", harga:"Rp 7.000", icon:"bi-cup-straw", status:"habis" }
+    ]
+};
+
+// =========================
+// ELEMENT
+// =========================
+const warungSelect = document.getElementById("warungSelect");
+const menuContainer = document.getElementById("menuContainer");
+
+// =========================
+// RENDER MENU
+// =========================
+function renderMenu(warung){
+    menuContainer.innerHTML = "";
+    const menus = warungData[warung];
+
+    menus.forEach(menu => {
+        const card = document.createElement("div");
+        card.className = "menu-card";
+        
+        card.onclick = () => {
+            window.location.href = "detail_menu.html";
+        };
+
+        card.innerHTML = `
+        <div class="menu-image">
+            <i class="bi ${menu.icon}"></i>
+            ${menu.status === "habis" ? `<div class="stock-badge">Habis</div>` : ""}
+        </div>
+        <div class="menu-content">
+            <div class="menu-name">${menu.nama}</div>
+            <div class="menu-price">${menu.harga}</div>
+        </div>
+        `;
+        menuContainer.appendChild(card);
+    });
+}
+
+// =========================
+// LOAD WARUNG
+// =========================
+function loadWarung(){
+    Object.keys(warungData).forEach(warung => {
+        const option = document.createElement("option");
+        option.value = warung;
+        option.textContent = warung;
+        warungSelect.appendChild(option);
+    });
+    renderMenu(warungSelect.value);
+}
+
+// Fungsi diubah untuk langsung mengarah ke profil_warung.html
+function lihatWarung(){
+    window.location.href = 'profil_warung.html';
+}
+
+// =========================
+// EVENT
+// =========================
+warungSelect.addEventListener("change", function(){
+    renderMenu(this.value);
+});
+
+// =========================
+// INIT
+// =========================
+loadWarung();
+</script>
+</body>
+</html>

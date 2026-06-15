@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login - E-Canteen BLU</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+
+:root{
+    --primary:#A1001C;
+    --primary-light:#C81D37;
+    --background:#F8F7F1;
+    --text:#1F2937;
+    --muted:#6B7280;
+    --border:#E5E7EB;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#2D2D2D;
+}
+
+.phone{
+    width:390px;
+    height:844px;
+    background:var(--background);
+    overflow:hidden;
+    position:relative;
+    border-radius:35px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.header{
+    height:130px;
+    background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-light)
+    );
+    border-bottom-left-radius:40px;
+    border-bottom-right-radius:40px;
+    position:relative;
+}
+
+.header::before{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    right:-50px;
+    top:-50px;
+}
+
+.back-btn{
+    position:absolute;
+    top:50px;
+    left:25px;
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:12px;
+    background:rgba(255,255,255,.15);
+    color:white;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.content{
+    min-height:calc(100vh - 150px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:16px;
+    margin-top:-20px;
+    animation:slideUp .8s ease;
+}
+
+.card{
+    width:100%;
+    background:white;
+    border-radius:24px;
+    padding:28px 24px;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.welcome{
+    margin-bottom:24px;
+    text-align:center;
+}
+
+.welcome h2{
+    color:var(--text);
+    font-size:28px;
+    margin-bottom:6px;
+}
+
+.welcome p{
+    color:var(--muted);
+    font-size:14px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.label{
+    display:block;
+    margin-bottom:8px;
+    font-size:14px;
+    font-weight:500;
+    color:var(--text);
+}
+
+.input-wrapper{
+    position:relative;
+}
+
+.input{
+    width:100%;
+    height:52px;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:0 18px;
+    font-size:14px;
+    outline:none;
+    transition:.3s;
+}
+
+.input:focus{
+    border-color:var(--primary);
+}
+
+.password-toggle{
+    position:absolute;
+    right:18px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    color:#888;
+}
+
+.error-box{
+    display:none;
+    margin-bottom:18px;
+    background:#FFF0F0;
+    color:#D62828;
+    padding:12px 16px;
+    border-radius:12px;
+    font-size:13px;
+}
+
+.forgot{
+    text-align:right;
+    margin-bottom:25px;
+}
+
+.forgot a{
+    color:var(--primary);
+    text-decoration:none;
+    font-size:13px;
+    font-weight:500;
+}
+
+.login-btn{
+    width:100%;
+    height:54px;
+    border:none;
+    border-radius:18px;
+    background:var(--primary);
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 12px 25px rgba(161,0,28,.2);
+}
+
+.login-btn:hover{
+    transform:translateY(-2px);
+}
+
+.register{
+    text-align:center;
+    margin-top:22px;
+    font-size:14px;
+    color:var(--muted);
+}
+
+.register a{
+    color:var(--primary);
+    font-weight:600;
+    text-decoration:none;
+}
+
+@keyframes slideUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.success-box{
+    position:fixed;
+    top:30px;
+    left:50%;
+    transform:translateX(-50%) translateY(-20px);
+    background:#16A34A;
+    color:white;
+    padding:14px 20px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:14px;
+    font-weight:500;
+    box-shadow:0 10px 25px rgba(22,163,74,.25);
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+    z-index:9999;
+}
+
+.success-box.show{
+    opacity:1;
+    visibility:visible;
+    transform:translateX(-50%) translateY(0);
+}
+
+.success-box i{
+    font-size:18px;
+}
+
+@media(max-width:420px){
+    body{
+        background:var(--background);
+    }
+    .phone{
+        width:100%;
+        height:100vh;
+        border-radius:0;
+    }
+}
+
+</style>
+</head>
+
+<body>
+<div id="successBox" class="success-box">
+    <i class="bi bi-check-circle-fill"></i>
+    <span>Login berhasil</span>
+</div>
+
+<div class="phone">
+    <div class="header">
+        <button class="back-btn" onclick="window.location.href='welcome.html'">
+            <i class="bi bi-arrow-left"></i>
+        </button>
+    </div>
+
+    <div class="content">
+        <div class="card">
+            <div class="welcome">
+                <h2>Selamat Datang 👋</h2>
+                <p>Masuk ke akun E-Canteen BLU Anda</p>
+            </div>
+
+            <div class="error-box" id="errorBox"></div>
+
+            <div class="form-group">
+                <label class="label">Email</label>
+                <input type="email" class="input" id="email" placeholder="contoh: user@email.com">
+            </div>
+
+            <div class="form-group">
+                <label class="label">Password</label>
+                <div class="input-wrapper">
+                    <input type="password" class="input" id="password" placeholder="Masukkan password">
+                    <span class="password-toggle" onclick="togglePassword()">
+                        <i class="bi bi-eye" id="eyeIcon"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="forgot">
+                <a href="forgot_password.html">Lupa Password?</a>
+            </div>
+
+            <button class="login-btn" onclick="login()">Masuk</button>
+
+            <div class="register">
+                Belum punya akun? <a href="register.html">Daftar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+function togglePassword(){
+    const password = document.getElementById('password');
+    const icon = document.getElementById('eyeIcon');
+
+    if(password.type === "password"){
+        password.type = "text";
+        icon.classList.remove("bi-eye");
+        icon.classList.add("bi-eye-slash");
+    }else{
+        password.type = "password";
+        icon.classList.remove("bi-eye-slash");
+        icon.classList.add("bi-eye");
+    }
+}
+
+function showError(message){
+    const errorBox = document.getElementById('errorBox');
+    errorBox.style.display = "block";
+    errorBox.innerHTML = message;
+}
+
+function hideError(){
+    document.getElementById('errorBox').style.display = "none";
+}
+
+function login(){
+    const email = document.getElementById('email').value.trim().toLowerCase();
+    const password = document.getElementById('password').value;
+
+    if(email === ""){
+        showError("Email wajib diisi.");
+        return;
+    }
+
+    if(password === ""){
+        showError("Password wajib diisi.");
+        return;
+    }
+
+    // Menggunakan kredensial dummy untuk pengujian login umum
+    const dummyEmail = "user@student.budiluhur.ac.id";
+    const dummyPassword = "123";
+
+    if(email === dummyEmail && password === dummyPassword){
+        hideError();
+        const successBox = document.getElementById("successBox");
+        successBox.classList.add("show");
+
+        setTimeout(() => {
+            window.location.href = "beranda.html";
+        }, 1500);
+    }else{
+        showError("Email atau password salah.");
+    }
+}
+
+document.addEventListener("keypress", function(event){
+    if(event.key === "Enter"){
+        login();
+    }
+});
+
+document.getElementById("email").addEventListener("input", hideError);
+document.getElementById("password").addEventListener("input", hideError);
+
+</script>
+
+</body>
+</html>

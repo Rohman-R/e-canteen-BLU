@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil Warung - E-Canteen BLU</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+:root{
+    --primary: #A1001C;
+    --primary-light: #C81D37;
+    --background: #FCFBF4;
+    --text: #1F2937;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --success: #16A34A;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #2D2D2D;
+}
+
+.phone{
+    width: 390px;
+    height: 844px;
+    background: var(--background);
+    overflow: hidden;
+    position: relative;
+    border-radius: 35px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER */
+.header{
+    height: 120px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    position: relative;
+    padding-top: 45px;
+    flex-shrink: 0;
+}
+
+.back-btn{
+    position: absolute;
+    top: 45px;
+    left: 20px;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255,255,255,.15);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-title{
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* CONTENT CONTAINER */
+.content{
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+.content::-webkit-scrollbar{ display: none; }
+
+/* FOTO WARUNG */
+.warung-frame {
+    width: 100%;
+    height: 180px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.warung-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* DETAIL INFO */
+.main-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 18px;
+    gap: 10px;
+}
+
+.warung-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+}
+
+/* STATUS BADGE */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.status-badge.buka { background: var(--success); }
+.status-badge.tutup { background: #DC2626; }
+
+.divider {
+    height: 1px;
+    background: var(--border);
+    margin: 15px 0;
+}
+
+/* CARD DETAILS SECTION */
+.info-section {
+    margin-bottom: 20px;
+}
+
+.info-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.info-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.5;
+}
+
+/* LOKASI BOX */
+.lokasi-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+.lokasi-box i {
+    color: var(--primary);
+    font-size: 18px;
+}
+
+/* MAPS LINK BUTTON */
+.btn-maps {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 46px;
+    background: transparent;
+    color: #2563EB;
+    border: 1.5px solid #2563EB;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 5px;
+    transition: 0.2s;
+}
+
+.btn-maps:hover {
+    background: rgba(37, 99, 235, 0.05);
+}
+
+/* FOOTER ACTION BUTTON */
+.bottom-action{
+    padding: 20px;
+    background: white;
+    border-top: 1px solid var(--border);
+}
+
+.btn-primary-action{
+    width: 100%;
+    height: 52px;
+    border: none;
+    border-radius: 14px;
+    background: var(--primary);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-primary-action:hover{
+    opacity: 0.95;
+}
+
+@media(max-width:420px){
+    body{ background: var(--background); }
+    .phone{ width: 100%; height: 100vh; border-radius: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="phone">
+
+    <div class="header">
+        <button class="back-btn" onclick="history.back()">
+            <i class="bi bi-arrow-left"></i>
+        </button>
+        <div class="page-title">Profil Warung</div>
+    </div>
+
+    <div class="content">
+
+        <div class="warung-frame">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=600" alt="Foto Warung">
+        </div>
+
+        <div class="main-info">
+            <h2 class="warung-title">Warung Bu Sari</h2>
+            
+            <span class="status-badge buka">Buka</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="info-section">
+            <div class="info-label">Tentang Warung</div>
+            <p class="info-text">
+                Menyediakan aneka ragam kuliner nusantara yang lezat dan higienis. Mulai dari Nasi Goreng Spesial, Bakso, mie ayam, hingga berbagai minuman segar. Cocok untuk makan siang mahasiswa dan staf dengan pelayanan yang super cepat.
+            </p>
+        </div>
+
+        <div class="info-section">
+            <div class="info-label">Lokasi Lapak</div>
+            <div class="lokasi-box">
+                <i class="bi bi-geo-alt-fill"></i>
+                <span class="info-text">Gedung Pujasera Utama, Lapak No. 04 (Samping Area Kasir)</span>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-label">Petunjuk Arah Google Maps</div>
+            <a href="https://maps.google.com" target="_blank" class="btn-maps">
+                <i class="bi bi-compass"></i> Buka di Google Maps
+            </a>
+        </div>
+
+    </div>
+
+    <div class="bottom-action">
+        <button class="btn-primary-action" onclick="window.location.href='menu.html'">
+            Lihat Menu Makanan
+        </button>
+    </div>
+
+</div>
+
+</body>
+</html>
